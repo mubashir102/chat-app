@@ -131,6 +131,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     }
   );
 
+  // our custom code start from here for admin and user accounts
+
   var s = "SELECT email,id from users where email = '" + req.body.email + "' ";
   const c = await getQueryResult(s);
 
@@ -149,6 +151,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     c[0].id +
     "')";
   const aagg = await getQueryResult(again);
+
+  // our custom code end from here for admin and user accounts
 
   // await User.create(req.body);
   // return res.status(200).json({

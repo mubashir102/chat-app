@@ -113,139 +113,144 @@ io.on("connection", (socket) => {
   console.log("new user Connected...");
 
   //**************** */ video call functionality ************************
-  socket.on("isbusy", (rid) => {
-    for (const key in users) {
-      if (rid == users[key]) {
-        io.to(key).emit("itbusy");
-      }
-    }
-  });
 
-  socket.on("cutphone", (uid) => {
-    for (const key in users) {
-      if (uid == users[key]) {
-        io.to(key).emit("cutphoness");
-      }
-    }
-  });
+  // from here i comment code for disable video call functionality
 
-  socket.on("cutanswerd", (rsid) => {
-    for (const key in users) {
-      if (rsid == users[key]) {
-        io.to(key).emit("cutpeeranswer");
-      }
-    }
-  });
+  // socket.on("isbusy", (rid) => {
+  //   for (const key in users) {
+  //     if (rid == users[key]) {
+  //       io.to(key).emit("itbusy");
+  //     }
+  //   }
+  // });
 
-  socket.on("answerd", (rspid, ctype) => {
-    for (const key in users) {
-      if (rspid == users[key]) {
-        io.to(key).emit("answered", rspid, ctype);
-      }
-    }
-  });
+  // socket.on("cutphone", (uid) => {
+  //   for (const key in users) {
+  //     if (uid == users[key]) {
+  //       io.to(key).emit("cutphoness");
+  //     }
+  //   }
+  // });
 
-  socket.on("ringcall", (uid, scid, name, image, ctype) => {
-    for (const key in users) {
-      if (uid == users[key]) {
-        io.to(key).emit("ringcalling", uid, scid, name, image, ctype);
-      }
-    }
-  });
+  // socket.on("cutanswerd", (rsid) => {
+  //   for (const key in users) {
+  //     if (rsid == users[key]) {
+  //       io.to(key).emit("cutpeeranswer");
+  //     }
+  //   }
+  // });
 
-  socket.on("vccallmsg", (message) => {
-    const data = JSON.parse(message);
-    const user = findUser(data.username);
+  // socket.on("answerd", (rspid, ctype) => {
+  //   for (const key in users) {
+  //     if (rspid == users[key]) {
+  //       io.to(key).emit("answered", rspid, ctype);
+  //     }
+  //   }
+  // });
 
-    switch (data.type) {
-      case "store_user":
-        if (user != null) {
-          return;
-        }
-        const newUser = {
-          conn: socket.id,
-          username: data.username,
-        };
-        vausers.push(newUser);
-        break;
-      case "store_offer":
-        if (user == null) return;
-        user.offer = data.offer;
-        break;
-      case "store_candidate":
-        if (user == null) {
-          return;
-        }
-        if (user.candidates == null) user.candidates = [];
-        user.candidates.push(data.candidate);
-        break;
-      case "send_answer":
-        if (user == null) {
-          return;
-        }
-        sendData(
-          {
-            type: "answer",
-            answer: data.answer,
-          },
-          user.conn
-        );
-        break;
-      case "send_candidate":
-        if (user == null) {
-          return;
-        }
+  // socket.on("ringcall", (uid, scid, name, image, ctype) => {
+  //   for (const key in users) {
+  //     if (uid == users[key]) {
+  //       io.to(key).emit("ringcalling", uid, scid, name, image, ctype);
+  //     }
+  //   }
+  // });
 
-        sendData(
-          {
-            type: "candidate",
-            candidate: data.candidate,
-          },
-          user.conn
-        );
-        break;
-      case "join_call":
-        if (user == null) {
-          return;
-        }
+  // socket.on("vccallmsg", (message) => {
+  //   const data = JSON.parse(message);
+  //   const user = findUser(data.username);
 
-        sendData(
-          {
-            type: "offer",
-            offer: user.offer,
-          },
-          socket.id
-        );
-        user.candidates.forEach((candidate) => {
-          sendData(
-            {
-              type: "candidate",
-              candidate: candidate,
-            },
-            socket.id
-          );
-        });
-        break;
-    }
-  });
+  //   switch (data.type) {
+  //     case "store_user":
+  //       if (user != null) {
+  //         return;
+  //       }
+  //       const newUser = {
+  //         conn: socket.id,
+  //         username: data.username,
+  //       };
+  //       vausers.push(newUser);
+  //       break;
+  //     case "store_offer":
+  //       if (user == null) return;
+  //       user.offer = data.offer;
+  //       break;
+  //     case "store_candidate":
+  //       if (user == null) {
+  //         return;
+  //       }
+  //       if (user.candidates == null) user.candidates = [];
+  //       user.candidates.push(data.candidate);
+  //       break;
+  //     case "send_answer":
+  //       if (user == null) {
+  //         return;
+  //       }
+  //       sendData(
+  //         {
+  //           type: "answer",
+  //           answer: data.answer,
+  //         },
+  //         user.conn
+  //       );
+  //       break;
+  //     case "send_candidate":
+  //       if (user == null) {
+  //         return;
+  //       }
 
-  socket.on("closevc", (sameid) => {
-    for (const key in users) {
-      if (sameid == users[key]) {
-        io.to(key).emit("cutvc");
-      }
-    }
-    vausers.forEach((user) => {
-      if (user.conn == socket.id) {
-        vausers.splice(vausers.indexOf(user), 1);
-        return;
-      }
-    });
-  });
+  //       sendData(
+  //         {
+  //           type: "candidate",
+  //           candidate: data.candidate,
+  //         },
+  //         user.conn
+  //       );
+  //       break;
+  //     case "join_call":
+  //       if (user == null) {
+  //         return;
+  //       }
 
-  function sendData(data, conn) {
-    io.to(conn).emit("getingonmsgs", JSON.stringify(data));
-  }
+  //       sendData(
+  //         {
+  //           type: "offer",
+  //           offer: user.offer,
+  //         },
+  //         socket.id
+  //       );
+  //       user.candidates.forEach((candidate) => {
+  //         sendData(
+  //           {
+  //             type: "candidate",
+  //             candidate: candidate,
+  //           },
+  //           socket.id
+  //         );
+  //       });
+  //       break;
+  //   }
+  // });
+
+  // socket.on("closevc", (sameid) => {
+  //   for (const key in users) {
+  //     if (sameid == users[key]) {
+  //       io.to(key).emit("cutvc");
+  //     }
+  //   }
+  //   vausers.forEach((user) => {
+  //     if (user.conn == socket.id) {
+  //       vausers.splice(vausers.indexOf(user), 1);
+  //       return;
+  //     }
+  //   });
+  // });
+
+  // function sendData(data, conn) {
+  //   io.to(conn).emit("getingonmsgs", JSON.stringify(data));
+  // }
+
+  // until here i comment code for disable video call functionality
 
   //**************** */ video call functionality ************************
   /* Contacts */

@@ -31,6 +31,8 @@
   <!-- Toastr Css -->
   <link href="./assets/css/toastr.min.css" rel="stylesheet" />
 
+
+
 </head>
 
 <body>
@@ -91,7 +93,8 @@
           <li class="nav-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top"
             title="Knowledge">
             <a class="nav-link"  href="/articles" role="tab">
-              <i class="ri-questionnaire-line"></i>
+              <!-- <i class="ri-questionnaire-line"></i> -->
+              <i class="ri-question-line"></i>
             </a>
           </li>
           <!-- Knowledge base button tag end here  -->
@@ -237,7 +240,8 @@
         <!-- Start chats tab-pane -->
         <div class="tab-pane fade show active" id="pills-chat" role="tabpanel" aria-labelledby="pills-chat-tab">
           <!-- Start chats content -->
-          <div>
+          <div>           
+
             <div class="px-4 pt-4">
               
               <h4 class="mb-4">Chats</h4>
@@ -625,13 +629,13 @@
                   </li>
 
                   <li class="list-inline-item me-2 ms-0 audiocallicon">
-                    <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#audiocallModal">
+                    <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#audiocallModal" style="display: none;">
                       <i class="ri-phone-line"></i>
                     </button>
                   </li>
 
                   <li class="list-inline-item me-2 ms-0 videocallicon">
-                    <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#videocallModal">
+                    <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#videocallModal" style="display: none;">
                       <i class="ri-vidicon-line"></i>
                     </button>
                   </li>
@@ -1137,6 +1141,8 @@
         </div>
       </div>
     </div>
+
+   
     <!-- end incomingcall Modal -->
 
   <!-- JAVASCRIPT -->
@@ -1175,6 +1181,7 @@
         emit(obj, triggerElement) {}
       });
   </script>
+
 </body>
 
 </html>

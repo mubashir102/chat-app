@@ -6,12 +6,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>4XPORTAL Knowledgebase</title>
+
+   
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+   
+
     <!-- App favicon -->
   <link rel="shortcut icon" href="assets/images/logo4xp.ico">
    <!-- LOADING STYLESHEETS -->
    <link href="assets/articles/css/bootstrap.css" rel="stylesheet">
    <link href="assets/articles/css/font-awesome.min.css" rel="stylesheet">
    <link href="assets/articles/css/style.css" rel="stylesheet"> 
+
+
+
+
+
+
+   <script>
+    $(function() {
+      var availableTags = [
+        "How to change account password?",
+        "How to edit order details?",
+        "Lookup existing customer in order form",
+        "Change customer details",
+        "Add new user",            
+        "Asp",
+        "BASIC",
+        "C",
+        "Scheme",
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure"
+      ];
+      $("#tags").autocomplete({
+        source: availableTags,
+            select: function(event, ui) {
+        // Get the selected item's text
+            var selectedTag = ui.item.value;
+        
+        // Redirect to a new page based on the selected tag
+            if (selectedTag === "How to change account password?") {
+                window.location.href = "/faq";
+            }
+            else if (selectedTag === "How to edit order details?") {
+                window.location.href = "/description";
+            }
+            else if (selectedTag === "Add new user") {
+                window.location.href = "/description";
+            }
+            else if (selectedTag === "Change customer details") {
+                window.location.href = "/description";
+            }
+            else if(selectedTag === "Lookup existing customer in order form") {
+                window.location.href = "/description";
+            }
+            },
+      });
+    } );
+
+</script>
 </head>
 
 <body>
@@ -27,7 +89,7 @@
                     
                     <li>
                         <a href="/">
-                            <i class="fa fa-home"></i> Home</a>
+                            <i class="fa fa-home"></i> ffHome</a>
                     </li>
                     <li>
                         <a href="#">
@@ -58,7 +120,7 @@
             </div>
             <br>
             <div class="row search-row">
-                <input type="text" class="search" placeholder="What do you need help with?">
+                <input id="tags" type="text" class="search" placeholder="What do you need help with?">
                 <a class="buttonsearch btn btn-info btn-lg" href="search-results.html">Search</a>
             </div>
         </div>
@@ -331,7 +393,7 @@
     <!-- END COPYRIGHT INFO -->
 
     <!-- LOADING MAIN JAVASCRIPT -->
-    <script src="assets/articles/js/jquery-2.2.4.min.js"></script>
+    <!-- <script src="assets/articles/js/jquery-2.2.4.min.js"></script> -->
     <script src="assets/articles/js/main.js"></script>
     <script src="assets/articles/js/bootstrap.min.js"></script>
     <script src='https://cdn.rawgit.com/VPenkov/okayNav/master/app/js/jquery.okayNav.js'></script>

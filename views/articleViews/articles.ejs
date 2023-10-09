@@ -8,7 +8,7 @@
 
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
@@ -30,6 +30,9 @@
           var availableTags = [
             "How to change account password?",
             "How to edit order details?",
+            "Lookup existing customer in order form",
+            "Change customer details",
+            "Add new user",            
             "Asp",
             "BASIC",
             "C",
@@ -53,6 +56,15 @@
                     window.location.href = "/faq";
                 }
                 else if (selectedTag === "How to edit order details?") {
+                    window.location.href = "/description";
+                }
+                else if (selectedTag === "Add new user") {
+                    window.location.href = "/description";
+                }
+                else if (selectedTag === "Change customer details") {
+                    window.location.href = "/description";
+                }
+                else if(selectedTag === "Lookup existing customer in order form") {
                     window.location.href = "/description";
                 }
                 },
